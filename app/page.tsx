@@ -96,7 +96,7 @@ export default function Home() {
           >
             <h2 className="text-3xl sm:text-4xl font-extrabold mb-4 text-gray-900 dark:text-white tracking-tight">Why Acker Technologies?</h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              We're not just building tools. We're crafting the future of African development with an ecosystem designed for growth and innovation.
+              We&apos;re not just building tools. We&apos;re crafting the future of African development with an ecosystem designed for growth and innovation.
             </p>
           </motion.div>
           <motion.div 

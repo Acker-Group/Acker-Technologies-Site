@@ -45,7 +45,7 @@ export default function AboutPageClient() {
       name: 'Xander Roux',
       role: 'Partner',
       ownership: '40% shareholder of Acker Group SA',
-      bio: 'Strategic partner and co-founder bringing operational excellence and business development expertise. Xander works alongside Tyler to scale Acker Group\'s subsidiaries and foster sustainable growth across all business verticals.',
+      bio: 'Strategic partner and co-founder bringing operational excellence and business development expertise. Xander works alongside Tyler to scale Acker Group&apos;s subsidiaries and foster sustainable growth across all business verticals.',
       image: '/xander-roux.jpg', // Placeholder image path
     },
   ]
@@ -71,7 +71,7 @@ export default function AboutPageClient() {
             variants={fadeIn}
             transition={{ duration: 0.6 }}
           >
-            Empowering Africa's Digital Future
+            Empowering Africa&apos;s Digital Future
           </motion.h1>
           <motion.p 
             className="mt-6 text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"

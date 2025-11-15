@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
         <div className="prose prose-lg dark:prose-invert max-w-none">
           <p>Last updated: November 15, 2025</p>
           
-          <p>Acker Technologies ("us", "we", or "our") operates the https://acker-technologies.com website (the "Service").</p>
+          <p>Acker Technologies (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;) operates the https://acker-technologies.com website (the &quot;Service&quot;).</p>
           
           <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy.</p>
 
@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
 
           <h3>Types of Data Collected</h3>
           <h4>Personal Data</h4>
-          <p>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
+          <p>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you (&quot;Personal Data&quot;). Personally identifiable information may include, but is not limited to:</p>
           <ul>
             <li>Email address</li>
             <li>First name and last name</li>

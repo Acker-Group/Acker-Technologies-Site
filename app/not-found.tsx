@@ -9,7 +9,7 @@ export default function NotFound() {
           Page Not Found
         </h2>
         <p className="text-xl text-silver-600 dark:text-silver-400 mt-4 mb-8">
-          Sorry, the page you're looking for doesn't exist.
+          Sorry, the page you&apos;re looking for doesn&apos;t exist.
         </p>
         <Link
           href="/"

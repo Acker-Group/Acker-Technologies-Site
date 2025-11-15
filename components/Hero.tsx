@@ -75,7 +75,7 @@ export default function Hero() {
           className="text-lg sm:text-xl md:text-2xl text-blue-800 dark:text-blue-100 max-w-3xl mx-auto mb-12"
           variants={itemVariants}
         >
-          Empowering Africa's developers with a seamless ecosystem of tools, platforms, and opportunities.
+          Empowering Africa&apos;s developers with a seamless ecosystem of tools, platforms, and opportunities.
         </motion.p>
 
         <motion.div 

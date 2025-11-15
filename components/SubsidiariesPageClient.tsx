@@ -91,7 +91,7 @@ export default function SubsidiariesPageClient() {
             Our Ecosystem
           </h1>
           <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
-            Acker Technologies is more than a company—it's a synergistic ecosystem of platforms and services designed to empower modern developers and designers.
+            Acker Technologies is more than a company—it&apos;s a synergistic ecosystem of platforms and services designed to empower modern developers and designers.
           </p>
         </motion.div>
       </section>

@@ -127,7 +127,7 @@ export default function ContactPageClient() {
           className="max-w-7xl mx-auto"
         >
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400">
-            Let's Connect
+            Let&apos;s Connect
           </h1>
           <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
             Have a project in mind, a question about our ecosystem, or just want to say hello? We'd love to hear from you.
@@ -187,7 +187,7 @@ export default function ContactPageClient() {
                 >
                   <CheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-green-500 mx-auto mb-6" />
                   <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Message Sent!</h2>
-                  <p className="mt-4 text-gray-600 dark:text-gray-400">Thank you for reaching out. We'll get back to you as soon as possible.</p>
+                  <p className="mt-4 text-gray-600 dark:text-gray-400">Thank you for reaching out. We&apos;ll get back to you as soon as possible.</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">

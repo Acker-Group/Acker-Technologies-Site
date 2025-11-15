@@ -114,7 +114,7 @@ export default function BlogPageClient() {
           ) : (
             <div className="text-center py-16">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Coming Soon</h2>
-              <p className="mt-4 text-gray-600 dark:text-gray-400">We're working on new content. Please check back later!</p>
+              <p className="mt-4 text-gray-600 dark:text-gray-400">We&apos;re working on new content. Please check back later!</p>
             </div>
           )}
         </div>
