@@ -130,7 +130,7 @@ export default function ContactPageClient() {
             Let&apos;s Connect
           </h1>
           <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300">
-            Have a project in mind, a question about our ecosystem, or just want to say hello? We'd love to hear from you.
+            Have a project in mind, a question about our ecosystem, or just want to say hello? We&apos;d love to hear from you.
           </p>
         </motion.div>
       </section>
