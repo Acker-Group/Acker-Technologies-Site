@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from 'react'
 import { motion } from 'framer-motion'
+import { useForm, ValidationError } from '@formspree/react'
 import { Send, Mail, MapPin, Phone, CheckCircle, AlertCircle } from 'lucide-react'
 
 interface FormData {
@@ -11,33 +12,29 @@ interface FormData {
   message: string;
 }
 
-const InputField = ({ id, name, type = 'text', placeholder, value, onChange, error }: { id: string, name: string, type?: string, placeholder: string, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, error: string }) => (
+const InputField = ({ id, name, type = 'text', placeholder, error }: { id: string, name: string, type?: string, placeholder: string, error: React.ReactNode }) => (
   <div className="relative">
     <input
       id={id}
       name={name}
       type={type}
       placeholder={placeholder}
-      value={value}
-      onChange={onChange}
       className={`w-full bg-white dark:bg-gray-900/50 border rounded-lg px-4 py-3 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 transition-all duration-300 ${
         error
           ? 'border-red-500 focus:ring-red-500/50'
           : 'border-gray-200 dark:border-gray-700 focus:ring-blue-500/50'
       }`}
     />
-    {error && <p className="mt-2 text-sm text-red-500 flex items-center"><AlertCircle className="w-4 h-4 mr-1" />{error}</p>}
+    {error && <div className="mt-2 text-sm text-red-500 flex items-center"><AlertCircle className="w-4 h-4 mr-1" />{error}</div>}
   </div>
 )
 
-const TextareaField = ({ id, name, placeholder, value, onChange, error }: { id: string, name: string, placeholder: string, value: string, onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void, error: string }) => (
+const TextareaField = ({ id, name, placeholder, error }: { id: string, name: string, placeholder: string, error: React.ReactNode }) => (
   <div className="relative">
     <textarea
       id={id}
       name={name}
       placeholder={placeholder}
-      value={value}
-      onChange={onChange}
       rows={5}
       className={`w-full bg-white dark:bg-gray-900/50 border rounded-lg px-4 py-3 text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 resize-none transition-all duration-300 ${
         error
@@ -45,74 +42,34 @@ const TextareaField = ({ id, name, placeholder, value, onChange, error }: { id: 
           : 'border-gray-200 dark:border-gray-700 focus:ring-blue-500/50'
       }`}
     />
-    {error && <p className="mt-2 text-sm text-red-500 flex items-center"><AlertCircle className="w-4 h-4 mr-1" />{error}</p>}
+    {error && <div className="mt-2 text-sm text-red-500 flex items-center"><AlertCircle className="w-4 h-4 mr-1" />{error}</div>}
   </div>
 )
 
 export default function ContactPageClient() {
-  const [formData, setFormData] = useState<FormData>({ name: '', email: '', subject: '', message: '' })
-  const [errors, setErrors] = useState<Partial<FormData>>({})
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null)
-
-  const validate = () => {
-    const tempErrors: Partial<FormData> = {}
-    if (!formData.name) tempErrors.name = "Name is required."
-    if (!formData.email) {
-      tempErrors.email = "Email is required."
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      tempErrors.email = "Email is invalid."
-    }
-    if (!formData.subject) tempErrors.subject = "Subject is required."
-    if (!formData.message) tempErrors.message = "Message is required."
-    setErrors(tempErrors)
-    return Object.keys(tempErrors).length === 0
-  }
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    if (validate()) {
-      setIsSubmitting(true)
-      setSubmitStatus(null)
-      try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        })
-
-        if (response.ok) {
-          setSubmitStatus('success')
-          setFormData({ name: '', email: '', subject: '', message: '' })
-        } else {
-          setSubmitStatus('error')
-        }
-      } catch (error) {
-        console.error('Form submission error:', error)
-        setSubmitStatus('error')
-      } finally {
-        setIsSubmitting(false)
-        setTimeout(() => {
-          setSubmitStatus(null)
-        }, 5000)
-      }
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const fieldName = e.target.name as keyof FormData
-    const value = e.target.value
-    setFormData(prev => ({ ...prev, [fieldName]: value } as FormData))
-    if (errors[fieldName]) {
-      setErrors(prev => ({ ...prev, [fieldName]: undefined }))
-    }
-  }
+  const [state, handleSubmit] = useForm("xyzljvqn");
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
+  }
+
+  if (state.succeeded) {
+    return (
+      <div className="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-center py-12 px-6 sm:px-8 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700"
+          >
+            <CheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-green-500 mx-auto mb-6" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Message Sent!</h2>
+            <p className="mt-4 text-gray-600 dark:text-gray-400">Thank you for reaching out. We&apos;ll get back to you as soon as possible.</p>
+          </motion.div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -179,51 +136,34 @@ export default function ContactPageClient() {
               transition={{ duration: 0.7, delay: 0.4 }}
               className="p-6 sm:p-8 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700"
             >
-              {submitStatus === 'success' ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-12"
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <InputField id="name" name="name" placeholder="Your Name" error={<ValidationError prefix="Name" field="name" errors={state.errors} />} />
+                <InputField id="email" name="email" type="email" placeholder="Your Email" error={<ValidationError prefix="Email" field="email" errors={state.errors} />} />
+                <InputField id="subject" name="subject" placeholder="Subject" error={<ValidationError prefix="Subject" field="subject" errors={state.errors} />} />
+                <TextareaField id="message" name="message" placeholder="Your Message" error={<ValidationError prefix="Message" field="message" errors={state.errors} />} />
+                <button
+                  type="submit"
+                  disabled={state.submitting}
+                  className="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-black transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <CheckCircle className="w-16 h-16 sm:w-20 sm:h-20 text-green-500 mx-auto mb-6" />
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Message Sent!</h2>
-                  <p className="mt-4 text-gray-600 dark:text-gray-400">Thank you for reaching out. We&apos;ll get back to you as soon as possible.</p>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <InputField id="name" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} error={errors.name || ''} />
-                  <InputField id="email" name="email" type="email" placeholder="Your Email" value={formData.email} onChange={handleChange} error={errors.email || ''} />
-                  <InputField id="subject" name="subject" placeholder="Subject" value={formData.subject} onChange={handleChange} error={errors.subject || ''} />
-                  <TextareaField id="message" name="message" placeholder="Your Message" value={formData.message} onChange={handleChange} error={errors.message || ''} />
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-black transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <motion.div
-                          animate={{ rotate: 360 }}
-                          transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                          className="w-5 h-5 mr-3 border-t-2 border-b-2 border-white rounded-full"
-                        ></motion.div>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5 mr-3" />
-                        Send Message
-                      </>
-                    )}
-                  </button>
-                  {submitStatus === 'error' && (
-                    <p className="mt-4 text-sm text-red-500 flex items-center justify-center">
-                      <AlertCircle className="w-4 h-4 mr-1" />
-                      Something went wrong. Please try again later.
-                    </p>
+                  {state.submitting ? (
+                    <>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                        className="w-5 h-5 mr-3 border-t-2 border-b-2 border-white rounded-full"
+                      ></motion.div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 mr-3" />
+                      Send Message
+                    </>
                   )}
-                </form>
-              )}
+                </button>
+                <ValidationError errors={state.errors} />
+              </form>
             </motion.div>
           </div>
         </div>
