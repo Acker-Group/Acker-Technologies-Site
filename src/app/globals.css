@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #3B82F6;
+  --secondary: #1C1C1C;
+  --background: #0A0A0A;
+  --text: #FFFFFF;
+  --gray-50: #1F1F1F;
+  --gray-100: #2A2A2A;
+  --gray-900: #FFFFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--background);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Utility Classes */
+.bg-primary { background-color: var(--background); }
+.bg-secondary { background-color: var(--gray-50); }
+.bg-card { background-color: var(--gray-100); }
+.text-primary { color: var(--text); }
+.text-secondary { color: var(--gray-900); }
+.text-accent { color: var(--accent); }
+.bg-accent { background-color: var(--accent); }
+.border-accent { border-color: var(--accent); }
+.hover\:text-accent:hover { color: var(--accent); }
+.hover\:bg-accent:hover { background-color: var(--accent); }
